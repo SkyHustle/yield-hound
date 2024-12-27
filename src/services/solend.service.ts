@@ -14,14 +14,22 @@ export class SolendService {
         await this.market.loadReserves();
     }
 
-    async getAllPools(): Promise<any[]> {
+    async getAllPools(): Promise<any> {
         if (!this.market) {
             throw new Error("Solend market not initialized");
         }
 
-        return this.market.reserves.map((reserve) => ({
-            config: reserve.config,
-            stats: reserve.stats,
-        }));
+        const solReserve = this.market.reserves.find(
+            (reserve) => reserve.config.symbol === "SOL"
+        );
+
+        if (!solReserve) {
+            throw new Error("SOL pool not found");
+        }
+
+        return {
+            config: solReserve.config,
+            stats: solReserve.stats,
+        };
     }
 }
