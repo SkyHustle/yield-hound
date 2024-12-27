@@ -29,7 +29,7 @@ This project aims to develop a server-side application using ExpressJS with Type
 -   **Main Asset or Token Symbol**: The primary token or asset of the pool.
 -   **Deposits**: Total amount of assets deposited in the pool.
 -   **Borrow APR/APY**: Annual percentage rate or yield for borrowing from the pool.
--   **Lend APR/APY**: Annual percentage rate or yield for lending to the pool, which must exceed 5%.
+-   **Lend APR/APY**: Annual percentage rate or yield for lending to the pool, which must exceed 1%.
 -   **TVL (Total Value Locked)**: The total value of assets currently locked in the pool.
 -   **Utilization**: Percentage of pool assets currently being used for loans.
 -   **Fees**: Any applicable fees for deposits, withdrawals, or transactions.
