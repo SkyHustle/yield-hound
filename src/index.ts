@@ -1,5 +1,6 @@
 import express from "express";
 import { SolendService } from "./services/solend.service";
+import util from "util";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,7 +25,14 @@ app.listen(port, async () => {
         // Display SOL pool data
         const pool = await solendService.getAllPools();
         console.log("\nSOL Pool Raw Data:");
-        console.log(JSON.stringify(pool, null, 2));
+        console.log(
+            util.inspect(pool, {
+                colors: true,
+                depth: null,
+                maxArrayLength: null,
+                compact: false,
+            })
+        );
     } catch (error) {
         console.error("Failed to initialize Solend service:", error);
         process.exit(1);
