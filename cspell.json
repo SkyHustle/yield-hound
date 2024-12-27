@@ -1,0 +1,24 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "words": [
+        "solend",
+        "solana",
+        "defi",
+        "wads",
+        "solendprotocol",
+        "mainnet",
+        "tvl",
+        "firebaserc",
+        "emulators",
+        "tolocale",
+        "Solend"
+    ],
+    "ignoreWords": [],
+    "ignorePaths": [
+        "node_modules/**",
+        "dist/**",
+        "package-lock.json",
+        ".git/**"
+    ]
+}
