@@ -9,46 +9,22 @@ const solendService = new SolendService();
 app.get("/api/pools", async (req, res) => {
     try {
         const pools = await solendService.getAllPools();
-        const markdownTable = formatPoolsToMarkdown(pools);
-        res.send(markdownTable);
+        res.json(pools.slice(0, 10));
     } catch (error) {
         console.error("Error fetching pools:", error);
         res.status(500).send("Error fetching lending pools");
     }
 });
 
-function formatPoolsToMarkdown(pools: any[]) {
-    const tableHeader =
-        "| Token Symbol | Deposits | Borrow APY | Lend APY | TVL | Utilization | Fees |\n" +
-        "|-------------|----------|------------|-----------|-----|-------------|------|";
-
-    const tableRows = pools
-        .map((pool) => {
-            return `| ${
-                pool.tokenSymbol
-            } | $${pool.deposits.toLocaleString()} | ${pool.borrowAPY.toFixed(
-                2
-            )}% | ${pool.lendAPY.toFixed(
-                2
-            )}% | $${pool.tvl.toLocaleString()} | ${pool.utilization.toFixed(
-                2
-            )}% | ${(pool.fees * 100).toFixed(2)}% |`;
-        })
-        .join("\n");
-
-    return `${tableHeader}\n${tableRows}`;
-}
-
 app.listen(port, async () => {
     try {
         await solendService.initialize();
         console.log(`Server is running on port ${port}`);
 
-        // Display initial pool data
+        // Display first 10 pools as raw JSON
         const pools = await solendService.getAllPools();
-        const markdownTable = formatPoolsToMarkdown(pools);
-        console.log("\nAll Lending Pools:");
-        console.log(markdownTable);
+        console.log("\nFirst 10 Pools (Raw Data):");
+        console.log(JSON.stringify(pools.slice(0, 10), null, 2));
     } catch (error) {
         console.error("Failed to initialize Solend service:", error);
         process.exit(1);
